@@ -7,6 +7,15 @@ from typing import Optional, List
 from time import time
 from .data import Serializable, Settable
 
+# (stack)logger VERSION: v2.0.1
+# 1.0.0: old version
+# 1.1.0: refactored
+# 1.2.0: added timelog
+# 2.0.0: added color and json formatter, the logger is now modular
+# 2.0.1: refactored and such
+
+
+#REGION data
 RESERVED = frozenset(
     (
         "args",
@@ -34,12 +43,6 @@ RESERVED = frozenset(
         "threadName",
     )
 )
-
-# (stack)logger VERSION: v2.0.0
-# 1.0.0: old version
-# 1.1.0: refactored
-# 1.2.0: added timelog
-# 2.0.0: added color and json formatter, the logger is now modular
 
 class Payload(Serializable,Settable):
     """
@@ -72,6 +75,7 @@ class Payload(Serializable,Settable):
                     self.extra[key] = record.__dict__[key]
                 except TypeError:
                     self.extra[key] = str(record.__dict__[key])
+#ENDREGION
 
 #REGION formatters
 class ColorFormatter(logging.Formatter):
